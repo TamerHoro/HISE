@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <p>Total Patients: {{ total_patients }}</p>
+    <p>Average Age: {{ average_age }}</p>
+    <ul>
+        {% for patient in patients %}
+        <li>
+            <strong>Patient ID:</strong> {{ patient.id }}<br>
+            <strong>Name:</strong> {{ patient.name }}<br>
+            <strong>Birth Date:</strong> {{ patient.birthDate }}<br>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Search</a>
+</body>
+</html>
