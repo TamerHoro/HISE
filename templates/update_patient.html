@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is my first page</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+</head>
+<body>
+<div align="center"><b>Here is presented the information about patient:</b>
+<form>
+<table>
+    <tr>
+        <td>Patient name:</td>
+        <td>{{name}}</td>
+        <td><input type="text" placeholder="Enter new name"/></td>
+    </tr>
+    <tr>
+        <td>Birth day:</td>
+        <td>{{birthday}}</td>
+        <td><input type="text" placeholder="Enter new birth day"/></td>
+     </tr>
+    <tr>
+        <td colspan="3">
+            <button onclick="location.href='http://127.0.0.1:8000/update_patient.html'">Update</button>
+        </td>
+    </tr>
+</table>
+</form>
+</div>
+</body>
+</html>
