@@ -1,28 +1,76 @@
 from flask import Flask, request, render_template
 import requests
 from datetime import datetime
+from fhirclient import client
+import fhirclient.models.patient as p
+import fhirclient.models.evidence as e
+import fhirclient.models.observation as o
+from fhirclient.models.humanname import HumanName
+from fhirclient.models.contactpoint import ContactPoint
+from fhirclient.models.address import Address
 
 app = Flask(__name__)
 
 # Base URL for the HAPI FHIR server
 base_url = "https://hapi.fhir.org/baseR4"
-
+settings = {
+    'app_id': 'FHIR_Application',
+    'api_base': 'https://hapi.fhir.org/baseR4'
+}
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/submissionSuccess')
-def intakeform():
-    return render_template('submisionSUccess.html')
+@app.route('/submissionSuccess', methods=['POST'])
+def submitSucess():
+    # Extract form data
+    form_data = request.form
+    
+    #Create FHIR Patient resource
+    patient = p.Patient()
+   
+    
+    # Set the patient's name
+    name = HumanName()
+    name.family = 'Doe'
+    name.given = ['John']
+    patient.name = [name]
+
+    # Set the patient's gender
+    patient.gender = 'male'
+
+    # Set the patient's birth date
+    patient.birthDate = '1990-01-01'
+
+    # Set the patient's contact information
+    contact =  ContactPoint()
+    contact.system = 'phone'
+    contact.value = '555-555-5555'
+    contact.use = 'mobile'
+    patient.telecom = [contact]
+
+    # Set the patient's address
+    address = Address()
+    address.line = ['123 Main St']
+    address.city = 'Somewhere'
+    address.state = 'CA'
+    address.postalCode = '12345'
+    patient.address = [address]
+    
+    # Save the patient resource to the FHIR server
+    #patient.create(base_url)
+    
+    
+    return render_template('submissionSuccess.html')
 
 @app.route('/intakeform')
-def submitSucess():
-    return render_template('submissionSuces.html')
+def intakeform():
+    return render_template('intakeform.html')
 
-@app.route('/patient')
+@app.route('/sheduleAppointment')
 def patient():
-    return render_template('patient.html')
+    return render_template('/sheduleAppointment.html')
 
 @app.route('/diseasesearch')
 def diseasesearch():

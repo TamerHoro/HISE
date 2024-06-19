@@ -53,30 +53,30 @@
 
 <div class="container">
     <h2>Schedule an Appointment</h2>
-    <form action="/submimissionSuccess" method="post">
+    <form action="/submissionSuccess" method="post">
         <div class="form-group">
             <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" >
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" >
         </div>
         <div class="form-group">
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input type="tel" id="phone" name="phone" >
         </div>
         <div class="form-group">
             <label for="date">Preferred Date:</label>
-            <input type="date" id="date" name="date" required>
+            <input type="date" id="date" name="date" >
         </div>
         <div class="form-group">
             <label for="time">Preferred Time:</label>
-            <input type="time" id="time" name="time" required>
+            <input type="time" id="time" name="time" >
         </div>
         <div class="form-group">
             <label for="doctor">Select Doctor:</label>
-            <select id="doctor" name="doctor" required>
+            <select id="doctor" name="doctor" >
                 <option value="dr_smith">Dr. Smith</option>
                 <option value="dr_jones">Dr. Jones</option>
                 <option value="dr_williams">Dr. Williams</option>
@@ -84,7 +84,6 @@
         </div>
         <div class="form-group">
             <input type="submit" value="Schedule Appointment">
-            <a href="/patient">Shedule an appointment with a doctor</a><br>
         </div>
     </form>
 </div>
