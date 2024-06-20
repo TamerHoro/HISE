@@ -12,7 +12,7 @@ from fhirclient.models.address import Address
 app = Flask(__name__)
 
 # Base URL for the HAPI FHIR server
-base_url = "https://hapi.fhir.org/baseR4"
+
 settings = {
     'app_id': 'FHIR_Application',
     'api_base': 'https://hapi.fhir.org/baseR4'
@@ -59,7 +59,7 @@ def submitSucess():
     patient.address = [address]
     
     # Save the patient resource to the FHIR server
-    #patient.create(base_url)
+    patient.create(base_url)
     
     
     return render_template('submissionSuccess.html')
