@@ -8,11 +8,14 @@ import fhirclient.models.observation as o
 from fhirclient.models.humanname import HumanName
 from fhirclient.models.contactpoint import ContactPoint
 from fhirclient.models.address import Address
+from datetime import date
+import uuid
+
 
 app = Flask(__name__)
 
 # Base URL for the HAPI FHIR server
-
+base_url = 'https://hapi.fhir.org/baseR4'
 settings = {
     'app_id': 'FHIR_Application',
     'api_base': 'https://hapi.fhir.org/baseR4'
@@ -22,6 +25,11 @@ settings = {
 def index():
     return render_template('index.html')
 
+def GenerateUniquePatientID():
+    return str(uuid.uuid4())
+
+    
+
 @app.route('/submissionSuccess', methods=['POST'])
 def submitSucess():
     # Extract form data
@@ -29,7 +37,12 @@ def submitSucess():
     
     #Create FHIR Patient resource
     patient = p.Patient()
-   
+    
+    #Generate unique Patient ID
+    patient.id = GenerateUniquePatientID()
+    
+     # Create FHIR client instance
+    smart = client.FHIRClient(settings=settings)
     
     # Set the patient's name
     name = HumanName()
@@ -41,7 +54,7 @@ def submitSucess():
     patient.gender = 'male'
 
     # Set the patient's birth date
-    patient.birthDate = '1990-01-01'
+    patient.birthDate == date(year=1985, month=6, day=12)
 
     # Set the patient's contact information
     contact =  ContactPoint()
@@ -59,7 +72,7 @@ def submitSucess():
     patient.address = [address]
     
     # Save the patient resource to the FHIR server
-    patient.create(base_url)
+    patient.create(smart.server)
     
     
     return render_template('submissionSuccess.html')
